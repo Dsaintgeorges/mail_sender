@@ -7,25 +7,32 @@ import PySimpleGUI as sg
 pad_right = (10, 10)
 
 image_column = [
-    [sg.Image(filename='LogoWhite.png', key='-LOGO-')],
+    [sg.Image(filename='~/LogoWhite.png', key='-LOGO-')],
 ]
 
 left_column = [
-    [sg.Text('SMTP server:', size=(15, 1), pad=(0, 15)), sg.InputText(key="-SMTP_SERVER-", pad=(0, 15))],
-    [sg.Text('PORT:', size=(15, 1), pad=(0, 15)), sg.InputText(key="-SMTP_PORT-", pad=(0, 15))],
-    [sg.Text('Email:', size=(15, 1), pad=(0, 15)), sg.InputText(key="-EMAIL-", pad=(0, 15))],
-    [sg.Text('Mot de passe:', size=(15, 1), pad=(0, 15)), sg.InputText(key="-PASSWORD-", pad=(0, 15))]
+    [sg.Text('SMTP server:', size=(10, 1), pad=(10, 15)), sg.InputText(key="-SMTP_SERVER-",
+                                                                       default_text="smtp.office365.com", pad=(0, 15),
+                                                                       size=(18,1))],
+    [sg.Text('PORT:', size=(10, 1), pad=(10, 15)), sg.InputText(key="-SMTP_PORT-", default_text="587",
+                                                                pad=(0, 15),
+                                                                size=(18,1))],
+    [sg.Text('Email:', size=(10, 1), pad=(10, 15)), sg.InputText(key="-EMAIL-", pad=(0, 15),size=(18,1))],
+    [sg.Text('Mot de passe:', size=(10, 1), pad=(10, 15)), sg.InputText(key="-PASSWORD-",
+                                                                        password_char='*',
+                                                                        pad=(0, 15),
+                                                                        size=(18,1))]
 ]
 top_right_column = [
-    [sg.Text('Fichier excel:', size=(10, 1), pad=pad_right), sg.FileBrowse('Parcourir', key='-EXCEL-', pad=pad_right)],
-    [sg.Text('Template HTML:', size=(10, 1), pad=pad_right), sg.FileBrowse('Parcourir', key='-HTML-', pad=pad_right)],
-    [sg.Text('Titre', size=(10, 1), pad=pad_right), sg.InputText(key='-GENDER-', pad=pad_right)]
+    [sg.Text('Fichier excel:', size=(15, 1), pad=pad_right), sg.FileBrowse('Parcourir', key='-EXCEL-', file_types=[('XLSX Files','*.xlsx')], pad=pad_right)],
+    [sg.Text('Template HTML:', size=(15, 1), pad=pad_right), sg.FileBrowse('Parcourir', key='-HTML-', file_types=[('HTML Files','*.html')], pad=pad_right)],
+    [sg.Text('Titre:', size=(15, 1), pad=pad_right), sg.InputText(key='-GENDER-', pad=pad_right,size=(15,1))]
 ]
 middle_right_column = [
     [sg.Checkbox('Ajout du nom', default=False, key='-IS_NAME-', pad=pad_right)]
 ]
 bottom_right_column = [
-    [sg.Text('Email subject:', size=(10, 1), pad=pad_right), sg.InputText(key='-SUBJECT-', pad=pad_right)],
+    [sg.Text('Email subject:', size=(15, 1), pad=pad_right), sg.InputText(key='-SUBJECT-', pad=pad_right,size=(15,1))],
 ]
 submit_right_column = [
     [sg.Submit('Valider'), sg.Cancel('Annuler')]
@@ -43,7 +50,7 @@ layout = [
    sg.VSeparator(),
    sg.Column(right_column, vertical_alignment='center')],
 
-window = sg.Window('Mail sender', layout,size=(800,400))
+window = sg.Window('Mail sender', layout,size=(600,400))
 
 
 def send_email(email_to, email_from, email_subject, data):
